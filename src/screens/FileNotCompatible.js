@@ -5,6 +5,7 @@ import PoppinsText from '../components/PoppinsText';
 import Button from '../components/Button';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 export default function FileNotCompatible({navigation}) {
   React.useEffect(() => {
     async function fetchData() {
@@ -18,6 +19,7 @@ export default function FileNotCompatible({navigation}) {
   return (
     <View style={styles.container}>
       <Image source={require('../assets/bg4.png')} style={styles.avatar} />
+       
       <PoppinsText bold={true} style={styles.title}></PoppinsText>
       <Image
         source={require('../assets/fileinvalid.png')}

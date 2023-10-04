@@ -17,13 +17,13 @@ import APIManager from '../services/APIManager';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 // import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CarrierProfile from './CarrierProfile';
 import Home from './HomeV2';
 import Success from './Success';
 import FileNotCompatible from './FileNotCompatible';
 import Opps from './Opps';
+import AntdesignIcon from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
@@ -45,11 +45,10 @@ export default function CarrierHome({navigation}) {
         tabBarStyle: {
           height: 70,
           position: 'absolute',
-          shadowColor:'white',
-          bottom:16,
+          shadowColor: 'white',
+          bottom: 16,
           borderTopWidth: 0,
           borderBottomWidth: 0,
-          
         },
       }}>
       <Tab.Screen
@@ -57,12 +56,13 @@ export default function CarrierHome({navigation}) {
         component={CarrierProfile}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: () => {
+          tabBarIcon: ({color, focused}) => {
             return (
-              <Image
-                style={{width: 35, height: 35}}
-                source={require('../assets/home.png')}
-              />
+              focused ? (
+                <AntdesignIcon name="home" size={30} color="#34CCFF" />
+              ) : (
+                <AntdesignIcon name="home" size={30} color="black" />
+              )
             );
           },
         }}
@@ -72,12 +72,13 @@ export default function CarrierHome({navigation}) {
         component={FileNotCompatible}
         options={{
           tabBarLabel: 'Update',
-          tabBarIcon: () => {
+          tabBarIcon: ({color, focused}) => {
             return (
-              <Image
-                style={{width: 35, height: 35}}
-                source={require('../assets/down.png')}
-              />
+              focused ? (
+                <AntdesignIcon name="download" size={30} color="#34CCFF" />
+              ) : (
+                <AntdesignIcon name="download" size={30} color="black" />
+              )
             );
           },
         }}
@@ -87,12 +88,11 @@ export default function CarrierHome({navigation}) {
         component={Success}
         options={{
           tabBarLabel: 'Chat',
-          tabBarIcon: () => {
-            return (
-              <Image
-                style={{width: 30, height: 30}}
-                source={require('../assets/chat.png')}
-              />
+          tabBarIcon: ({color, focused}) => {
+            return focused ? (
+              <Ionicons name="chatbubble-outline" size={30} color="#34CCFF" />
+            ) : (
+              <Ionicons name="chatbubble-outline" size={30} color="black" />
             );
           },
         }}
@@ -102,12 +102,13 @@ export default function CarrierHome({navigation}) {
         component={Opps}
         options={{
           tabBarLabel: 'Support',
-          tabBarIcon: () => {
+          tabBarIcon: ({color, focused}) => {
             return (
-              <Image
-                style={{width: 30, height: 37}}
-                source={require('../assets/sup.png')}
-              />
+              focused ? (
+                <Ionicons name="person-outline" size={30} color="#34CCFF" />
+              ) : (
+                <Ionicons name="person-outline" size={30} color="black" />
+              )
             );
           },
         }}
@@ -115,55 +116,3 @@ export default function CarrierHome({navigation}) {
     </Tab.Navigator>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     height: '100%',
-//     width: '100%',
-//     backgroundColor: Styles.colors.darkblue,
-//   },
-//   imageContainer: {
-//     flex: 1,
-//     backgroundColor: 'blue',
-//   },
-//   image: {
-//     flex: 1,
-//     width: '100%',
-//     resizeMode: 'cover',
-//   },
-//   avatar: {
-//     width: '100%',
-//     // height: 120,
-//     position: 'absolute',
-//   },
-//   title: {
-//     color: Styles.colors.black,
-//     fontSize: 18,
-//     fontFamily: 'Poppins-Regular',
-//     alignSelf: 'center',
-//     marginTop: 10,
-//     marginBottom: 10,
-//   },
-//   text: {
-//     color: Styles.colors.white,
-//     fontSize: 14,
-//     // lineHeight: 23.46,
-//     textAlign: 'center',
-//     fontFamily: 'Poppins-SemiBold',
-//     marginBottom: 50,
-//   },
-//   inputContainer: {
-//     marginBottom: Styles.spacing.padding * 2,
-//   },
-//   inputLabel: {
-//     color: Styles.colors.green600,
-//   },
-//   input: {
-//     color: Styles.colors.white,
-//     fontSize: 18,
-//     paddingVertical: Styles.spacing.padding * 0.25,
-//     borderBottomWidth: 1,
-//     borderColor: Styles.colors.white,
-//     borderStyle: 'solid',
-//   },
-// });
