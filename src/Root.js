@@ -19,41 +19,28 @@ import SignUp from './screens/SignUp';
 import Login from './screens/Login';
 import VerifyCode from './screens/VerifyCode';
 import CarrierHome from './screens/CarrierHome';
+import CarrierManagement from './screens/CarrierManagement';
+import BrokerPacket from './screens/BrokerPacket';
 
 const Stack = createStackNavigator();
-
-// function OldMyStack() {
-//     return (
-//         <Stack.Navigator>
-//             <Stack.Screen name="Welcome" component={Welcome} options={{ title: "Welcome", headerShown: false }} />
-//             <Stack.Screen name="Login" component={Login} options={{ title: "Login", headerShown: false }} />
-//             <Stack.Screen name="Signup" component={Signup} options={{ title: "Signup", headerShown: true }} />
-//             <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ title: "Forgot Password", headerShown: true }} />
-//             <Stack.Screen name="TermsOfService" component={TermsOfService} options={{ title: "Terms of Service", headerShown: true }} />
-//             <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{ title: "Privacy Policy", headerShown: true }} />
-//             <Stack.Screen name="CCode" component={CCode} options={{ title: "", headerShown: false }} />
-//             <Stack.Screen name="AccountSetup" component={AccountSetup} options={{ title: "", headerShown: false }} />
-//             <Stack.Screen name="CreateRelay" component={CreateRelay} options={{ title: "Create a Relay", headerShown: true }} />
-//             <Stack.Screen name="RelaysList" component={RelaysList} options={{ title: "Your Relays", headerShown: false }} />
-//             <Stack.Screen name="RelaysInfo" component={RelaysInfo} options={{ title: "", headerShown: true }} />
-//         </Stack.Navigator>
-//     );
-// }
 
 function MyStack() {
     return (
         <Stack.Navigator>
+             <Stack.Screen name="CarrierHome" component={CarrierHome} options={{ title: "CarrierHome", headerShown: false }} />
 
             {/* <Stack.Screen name="Home" component={Home} options={{ title: "Home", headerShown: false }} /> */}
-            {/* <Stack.Screen name="HomeV2" component={HomeV2} options={{ title: "Home", headerShown: false }} />
+            <Stack.Screen name="HomeV2" component={HomeV2} options={{ title: "Home", headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ title: "SignUp", headerShown: false }} />
             <Stack.Screen name="Login" component={Login} options={{ title: "Login", headerShown: false }} />
-            <Stack.Screen name="Verifycode" component={VerifyCode} options={{ title: "Verifycode", headerShown: false }} /> */}
+            
 
-            <Stack.Screen name="CarrierHome" component={CarrierHome} options={{ title: "CarrierHome", headerShown: false }} />
+            <Stack.Screen name="Verifycode" component={VerifyCode} options={{ title: "Verifycode", headerShown: false }} />
             <Stack.Screen name="CarrierProfile" component={CarrierProfile} options={{ title: "CarrierProfile", headerShown: false }} />
             <Stack.Screen name="FilesUploaded" component={FilesUploaded} options={{ title: "FilesUploaded", headerShown: false }} />
             <Stack.Screen name="YourSupport" component={YourSupport} options={{ title: "YourSupport", headerShown: false }} />
+            <Stack.Screen name="CarrierManagement" component={CarrierManagement} options={{ title: "YourSupport", headerShown: false }} />
+            <Stack.Screen name="BrokerPacket" component={BrokerPacket} options={{ title: "BrokerPacket", headerShown: false }} />
 
 
             <Stack.Screen name="MyLLMlist" component={MyLLMlist} options={{ title: "MyLLMlist", headerShown: false }} />

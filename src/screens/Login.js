@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import InputText from '../components/InputText';
 import Styles from '../constants/Styles';
 import Button from '../components/Button';
+import { SearchBar } from 'react-native-elements';
 // import Card from '../../components/Card';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 // import {loginuser} from '../../utils/Constant';
@@ -47,6 +48,9 @@ export default function Login({navigation}) {
     //   navigation.navigate('AccountSetup');
     // });
   }
+  React.useEffect(() => {
+      // console.log(phoneNo);
+  },[])
 
   return (
     <View style={styles.container}>
@@ -80,16 +84,16 @@ export default function Login({navigation}) {
             margin: 30,
           }}>
           <InputText
-            label={<Text style={{ fontSize: 20,fontWeight:'bold',color:'black'}}>Email</Text>} 
-            value={''}
-            placeholder="Email.."
-            onChageValue={e => {}}
+            label={<Text style={{ fontSize: 20,fontWeight:'bold',color:'black'}}>Phone Number</Text>} 
+            value={phoneNo}
+            placeholder="Phone Number"
+            onChageValue={text => setPhoneNo(text)}
           />
           <InputText
             label={<Text style={{ fontSize: 20,fontWeight:'bold',color:'black'}}>Password</Text>} 
-            value={''}
+            value={password}
             placeholder="Password.."
-            onChageValue={e => {}}
+            onChageValue={e => setPassword(e)}
           />
         </View>
         <View
@@ -102,7 +106,8 @@ export default function Login({navigation}) {
             bgColor={Styles.colors.skyblue}
             text="CONFIRM"
             onPress={() => {
-              navigation.navigate('CarrierProfile');
+              navigation.navigate('Verifycode',{phone: phoneNo});
+              // console.log(phoneNo);
             }}
           />
           <Text style={styles.signuptext}>

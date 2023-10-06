@@ -18,12 +18,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CarrierProfile from './CarrierProfile';
-import Home from './HomeV2';
 import Success from './Success';
-import FileNotCompatible from './FileNotCompatible';
 import Opps from './Opps';
 import AntdesignIcon from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import CarrierManagement from './CarrierManagement';
+import { verifyotp } from '../utils/Constant';
+import VerifyCode from './VerifyCode';
+import BrokerPacket from './BrokerPacket';
+import AtflContract from './AtflContract';
+import Chat from './Chat';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,23 +41,27 @@ export default function CarrierHome({navigation}) {
     fetchData();
   }, []);
 
+  
+
   return (
     <Tab.Navigator
       initialRouteName="Update"
       screenOptions={{
         headerShown: false,
+        tabBarActiveTintColor:"#34CCFF",
         tabBarStyle: {
-          height: 70,
+          height: 86,
           position: 'absolute',
           shadowColor: 'white',
-          bottom: 16,
+          // bottom: 16,
+          paddingBottom:16,
           borderTopWidth: 0,
           borderBottomWidth: 0,
         },
       }}>
       <Tab.Screen
         name="Home"
-        component={CarrierProfile}
+        component={Chat}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, focused}) => {
@@ -69,7 +77,7 @@ export default function CarrierHome({navigation}) {
       />
       <Tab.Screen
         name="Update"
-        component={FileNotCompatible}
+        component={CarrierManagement}
         options={{
           tabBarLabel: 'Update',
           tabBarIcon: ({color, focused}) => {
@@ -85,7 +93,7 @@ export default function CarrierHome({navigation}) {
       />
       <Tab.Screen
         name="Chat"
-        component={Success}
+        component={BrokerPacket}
         options={{
           tabBarLabel: 'Chat',
           tabBarIcon: ({color, focused}) => {
@@ -99,7 +107,7 @@ export default function CarrierHome({navigation}) {
       />
       <Tab.Screen
         name="Support"
-        component={Opps}
+        component={AtflContract}
         options={{
           tabBarLabel: 'Support',
           tabBarIcon: ({color, focused}) => {

@@ -116,6 +116,7 @@ export default function Home({navigation}) {
         <Button
           bgColor={Styles.colors.skyblue}
           text="sign up"
+          texttransform='uppercase'
           onPress={() => {
             navigation.navigate('SignUp');
           }}
@@ -123,6 +124,7 @@ export default function Home({navigation}) {
         <Button
           bgColor={Styles.colors.skyblue}
           text="Login"
+          texttransform='uppercase'
           onPress={() => {
             navigation.navigate('Login');
           }}

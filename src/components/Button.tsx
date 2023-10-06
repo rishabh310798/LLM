@@ -7,6 +7,7 @@ interface ButtonPropss extends TextProps {
     bgColor: string;
     fontSize: number;
     fontWeight?: any;
+    texttransform?: any;
     onPress: (event: GestureResponderEvent) => void;
 }
 
@@ -29,7 +30,7 @@ export default function Button(props: ButtonPropss) {
         <Pressable style={[{ backgroundColor: props.bgColor }, styles.buttonView, props.style]}
             onPress={onPressHandler}
         >
-            <Text style={[textStyles, styles.button, {fontSize: props.fontSize , fontWeight:props.fontWeight}]}>{props.text}</Text>
+            <Text style={[textStyles, styles.button, {fontSize: props.fontSize , fontWeight:props.fontWeight,textTransform:props.texttransform}]}>{props.text}</Text>
         </Pressable>
     )
 }

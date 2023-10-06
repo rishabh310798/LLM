@@ -27,6 +27,7 @@ export default function SignUp({navigation}) {
   }, []);
 
   const [name, setName] = React.useState('');
+  const [phone,setPhoneNo] = React.useState('');
 
   return (
     <View style={styles.container}>
@@ -57,6 +58,7 @@ export default function SignUp({navigation}) {
             value={''}
             placeholder="Email.."
             onChageValue={e => {}}
+            
           />
           <InputText
             label={<Text style={{ fontSize: 20,fontWeight:'bold',color:'black'}}>Number</Text>}            
@@ -76,8 +78,9 @@ export default function SignUp({navigation}) {
         <Button
           bgColor={Styles.colors.skyblue}
           text="CONFIRM"
+          texttransform='uppercase'
           onPress={() => {
-            navigation.navigate('Verifycode');
+            navigation.navigate('Verifycode',{phone: phone});
           }}
         />
       </View>

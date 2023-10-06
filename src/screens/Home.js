@@ -49,8 +49,8 @@ export default function Home({ navigation }) {
                 marginLeft: 10,
                 marginRight: 20
             }}>
-                <Button bgColor={Styles.colors.skyblue} text='sign up' onPress={() => { navigation.navigate('SignUp') }} />
-                <Button bgColor={Styles.colors.skyblue} text='Login' onPress={() => { navigation.navigate('Login')}} />
+                <Button bgColor={Styles.colors.skyblue} texttransform='uppercase' text='sign up' onPress={() => { navigation.navigate('SignUp') }} />
+                <Button bgColor={Styles.colors.skyblue} texttransform='uppercase' text='Login' onPress={() => { navigation.navigate('Login')}} />
             </View>
 
         </View>
