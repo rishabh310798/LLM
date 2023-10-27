@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: Styles.colors.black,
-        fontSize: 18,
+        fontSize: 27,
         fontFamily: "Poppins-Regular",
         marginBottom: Styles.spacing.padding,
         alignSelf: 'center',

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "516888627891",
+    "project_id": "react-native-int",
+    "storage_bucket": "react-native-int.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516888627891:android:cad6333c073a67c8f2bec6",
+        "android_client_info": {
+          "package_name": "com.relayfoundry"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0mjGQzt7sPB7bHJbM8P6f7XSe8fb9VQ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

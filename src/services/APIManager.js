@@ -34,7 +34,7 @@ class APIManager {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': isRowData ? "application/json" : "application/x-www-form-urlencoded",
-                'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
+                // 'Authorization': 'Bearer ' + await AsyncStorage.getItem('token')
             },
             body: isRowData ? JSON.stringify(rowData) : formData
         })

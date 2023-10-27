@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   Pressable,
+  TouchableOpacity,
 } from 'react-native';
 import Styles from '../constants/Styles';
 import Button from '../components/Button';
@@ -14,50 +15,61 @@ import AntdesignIcon from 'react-native-vector-icons/AntDesign';
 import {TextInput} from 'react-native-paper';
 import {SearchBar} from 'react-native-elements';
 import InputText from '../components/InputText';
+import {Tab} from '@rneui/themed';
+import Voice from '@react-native-community/voice';
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['new NativeEventEmitter']); // Ignore log notification by message
+LogBox.ignoreAllLogs();
 
 export default function Chat({navigation}) {
   const [searchText, setSearchText] = React.useState('');
-  const listOfMenu = [
-    'Freights',
-    'Tracking',
-    'Payments',
-    'Freights',
-    'Tracking',
-    'Payments',
-    'Freights',
-    'Tracking',
-    'Payments',
-  ];
+
+  const [result, setResult] = React.useState([]);
+  const [error, setError] = React.useState('');
+  const [isRecording, setIsRecording] = React.useState(false);
+
+  Voice.onSpeechStart = () => setIsRecording(true);
+  Voice.onSpeechEnd = () => setIsRecording(false);
+  Voice.onSpeechError = error => setError(error);
+  Voice.onSpeechResult = e => setResult(e.value[0]);
+
+  const startRecording = async () => {
+    try {
+      await Voice.start('en-US');
+    } catch (err) {
+      setError(err);
+      throw err;
+    }
+  };
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
+      setIsRecording(!isRecording);
+    } catch (err) {
+      setError(err);
+      throw err;
+    }
+  };
+  React.useEffect(() => {
+      console.log("result: " + result)
+  },[]);
 
   return (
-    <View style={styles.container}>
-      <Image source={require('../assets/bg1.png')} style={styles.avatar} />
-      <PoppinsText bold={true} style={styles.title}>
-        Create a Chat
-      </PoppinsText>
+    <View style={{alignItems: 'center', margin: 20}}>
+      <Text style={{fontSize: 20, color: 'green', fontWeight: 'bold'}}>
+        Voice Input
+      </Text>
+      <Text>{result}</Text>
+      <Text>{JSON.stringify(error)}</Text>
 
-      <View style={{margin: 25,marginTop:320}}>
-        <TextInput
-          label=""
-          value={searchText}
-          placeholder="Enter your name"
-          onChageValue={e => {
-            setSearchText(e);
-          }}
-          style={{backgroundColor:'white',borderRadius:10,justifyContent:'center',textAlign:'center'}}
-        />
-      </View>
+      <TouchableOpacity
+        style={{marginTop: 30}}
+        onPress={() => {
+          isRecording ? stopRecording() : startRecording();
+        }}>
+        <Text style={{color:'black' ,fontSize:20}}>{isRecording ? 'Stop' : 'Start'}</Text>
+      </TouchableOpacity>
 
-      <View style={{marginTop: 140, marginRight: 30,marginLeft:20}}>
-        <Button
-          bgColor={Styles.colors.skyblue}
-          text="Confirm"
-          texttransform="uppercase"
-          
-          fontWeight="bold"
-          onPress={() => {}}
-        />
-      </View>
     </View>
   );
 }
@@ -145,6 +157,24 @@ const styles = StyleSheet.create({
   },
   searchIcon: {
     padding: 10,
+  },
+  chatbox: {
+    backgroundColor: Styles.colors.gray500,
+    borderRadius: 10,
+    marginBottom: 20,
+    marginLeft: 170,
+  },
+  chatbox1: {
+    backgroundColor: Styles.colors.skyblue,
+    padding: 10,
+    borderRadius: 10,
+    marginBottom: 30,
+    marginRight: 170,
+    padding: 20,
+  },
+  chattext: {
+    fontSize: 16,
+    color: 'black',
   },
   input: {
     flex: 1,

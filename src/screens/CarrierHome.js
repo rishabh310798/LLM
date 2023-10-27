@@ -28,6 +28,7 @@ import VerifyCode from './VerifyCode';
 import BrokerPacket from './BrokerPacket';
 import AtflContract from './AtflContract';
 import Chat from './Chat';
+import FreightChatV2 from './FreightChatV2';
 
 const Tab = createBottomTabNavigator();
 
@@ -61,7 +62,7 @@ export default function CarrierHome({navigation}) {
       }}>
       <Tab.Screen
         name="Home"
-        component={Chat}
+        component={CarrierProfile}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({color, focused}) => {
@@ -93,7 +94,7 @@ export default function CarrierHome({navigation}) {
       />
       <Tab.Screen
         name="Chat"
-        component={BrokerPacket}
+        component={FreightChatV2}
         options={{
           tabBarLabel: 'Chat',
           tabBarIcon: ({color, focused}) => {
@@ -107,7 +108,7 @@ export default function CarrierHome({navigation}) {
       />
       <Tab.Screen
         name="Support"
-        component={AtflContract}
+        component={CarrierManagement}
         options={{
           tabBarLabel: 'Support',
           tabBarIcon: ({color, focused}) => {

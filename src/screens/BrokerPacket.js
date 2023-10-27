@@ -28,6 +28,7 @@ export default function BrokerPacket({navigation}) {
   }, []);
   const DATA = [
     {
+      id: 1,
       title: 'TODO',
     },
    
@@ -81,7 +82,7 @@ export default function BrokerPacket({navigation}) {
             bgColor={Styles.colors.skyblue}
             text="Accept"
             onPress={() => {
-             
+              navigation.navigate("CarrierHome",{screen: 'Home'})
               // console.log(phoneNo);
             }}
           />
@@ -89,7 +90,7 @@ export default function BrokerPacket({navigation}) {
             bgColor={Styles.colors.skyblue}
             text="Decline"
             onPress={() => {
-              
+              navigation.navigate("Atfl")
               // console.log(phoneNo);
             }}
           />

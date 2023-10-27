@@ -16,9 +16,8 @@ import {SearchBar} from 'react-native-elements';
 
 export default function CarrierManagement({navigation}) {
   const [searchText, setSearchText] = React.useState('');
-  const listOfMenu = ['Freights', 'Tracking', 'Payments','Freights', 'Tracking', 'Payments','Freights', 'Tracking', 'Payments'];
+  const listOfMenu = ['Tracking', 'Payments'];
 
- 
   return (
     <View style={styles.container}>
       <Image source={require('../assets/ep1.png')} style={styles.avatar} />
@@ -29,7 +28,7 @@ export default function CarrierManagement({navigation}) {
       <View style={{margin: 25}}>
         <SearchBar
           placeholder="Search"
-          onChangeText={e =>setSearchText(e)}
+          onChangeText={e => setSearchText(e)}
           value={searchText}
           inputContainerStyle={styles.searchSection}
           containerStyle={{backgroundColor: 'white', borderRadius: 15}}
@@ -42,13 +41,24 @@ export default function CarrierManagement({navigation}) {
           marginTop: 80,
           backgroundColor: Styles.colors.white,
           padding: 30,
-          height:250,
+          height: 250,
           borderRadius: 10,
           // flex:1
         }}
         elevation={10}>
         <View>
           <ScrollView>
+            <Button
+              bgColor={Styles.colors.gray500}
+              text="Frieghts"
+              fontSize={18}
+              fontWeight="bold"
+              onPress={() => {
+                navigation.navigate('FreightChat');
+              }}
+              texttransform="none"
+              
+            />
             {listOfMenu.map((cur, index) => {
               return cur == 'Payments' ? (
                 <Pressable style={styles.buttonView} key={index}>
@@ -71,13 +81,14 @@ export default function CarrierManagement({navigation}) {
                   text={cur}
                   fontSize={18}
                   fontWeight="bold"
-                  onPress={() => {}}
+                  onPress={() => {
+                   
+                  }}
                   texttransform="none"
                   key={index}
                 />
               );
             })}
-            
           </ScrollView>
         </View>
       </View>

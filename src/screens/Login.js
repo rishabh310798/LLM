@@ -1,15 +1,22 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  ActivityIndicator,
+  ScrollView,
+  KeyboardAvoidingView,
+} from 'react-native';
 import InputText from '../components/InputText';
 import Styles from '../constants/Styles';
 import Button from '../components/Button';
-import { SearchBar } from 'react-native-elements';
-// import Card from '../../components/Card';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {loginuser} from '../../utils/Constant';
-// import APIManager from '../../services/APIManager';
-// import {TouchableOpacity} from 'react-native-gesture-handler';
+import {SearchBar} from 'react-native-elements';
 import PoppinsText from '../components/PoppinsText';
+import {loginuser} from '../utils/Constant';
+import APIManager from '../services/APIManager';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({navigation}) {
   const [email, setEmail] = React.useState('');
@@ -19,112 +26,167 @@ export default function Login({navigation}) {
 
   const [message, setMessage] = React.useState('');
 
-  //   React.useEffect(async () => {}, []);
+  const [errors, setErrors] = React.useState({});
+  const [err, setErr] = React.useState(false);
+  const [isFormValid, setIsFormValid] = React.useState(false);
+  const [isLoaded, setIsLoaded] = React.useState(false);
+  const validateForm = () => {
+    let errors = {};
 
-  function validatedata() {
-    if (email === '') {
-      setMessage('Email required!!');
-      return false;
-    } else if (password === '') {
-      setMessage('Password required!!');
-      return false;
-    } else {
-      setMessage('');
-      return true;
+    // Validate email field
+    if (!email) {
+      errors.email = 'Email is required.';
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.email = 'Email is invalid.';
     }
-  }
 
-  function userLogin() {
-    // APIManager.postAPI(
-    //   loginuser,
-    //   {
-    //     email: email,
-    //     password: password,
-    //   },
-    //   null,
-    //   true,
-    // ).then(async response => {
-    //   await AsyncStorage.setItem('token', response.access_token);
-    //   navigation.navigate('AccountSetup');
-    // });
-  }
+    // Validate password field
+    if (!password) {
+      errors.password = 'Password is required.';
+    } else if (password.length < 4) {
+      errors.password = 'Password must be at least 6 characters.';
+    }
+
+    // Set the errors and update form validity
+    setErrors(errors);
+    setIsFormValid(Object.keys(errors).length === 0);
+  };
+  const userLogin = () => {
+    validateForm();
+    // navigation.navigate('CarrierHome')
+    if (isFormValid) {
+      // Form is valid, perform the submission logic
+      console.log('Form submitted successfully!');
+      setIsLoaded(true);
+      APIManager.postAPI(
+        loginuser,
+        {
+          email: email,
+          password: password,
+        },
+        null,
+        true,
+      )
+        .then(async response => {
+          if (response.access) {
+            // await AsyncStorage.setItem('token', response.access);
+            navigation.navigate('CarrierHome');
+          }
+          if (response.detail) {
+            setErr(response.detail);
+            setIsLoaded(false);
+          }
+          console.log(response);
+        })
+        .catch(err => {
+          setErr(true);
+          setIsLoaded(false);
+        });
+    }
+  };
   React.useEffect(() => {
-      // console.log(phoneNo);
-  },[])
+    // Trigger form validation when name,
+    // email, or password changes
+  }, [email, password]);
 
   return (
-    <View style={styles.container}>
-      <Image source={require('../assets/bg4.png')} style={styles.avatar} />
-
-      <View
-        style={{
-          height: '55%',
-          //   margin: 30,
-        }}>
-        <PoppinsText bold={true} style={styles.title }>
-          Login
-        </PoppinsText>
-        {/* <Image
-          source={require('../../assets/truck.png')}
-          style={{
-            width: 120,
-            height: 120,
-            alignItems: 'flex-end',
-            alignContent: 'flex-end',
-            alignSelf: 'flex-end',
-            marginBottom: 60,
-          }}
-        /> */}
-        <Image
-          source={require('../assets/box-truck.png')}
-          style={{width: '100%', marginTop: 100}}
-        />
-        <View
-          style={{
-            margin: 30,
-          }}>
-          <InputText
-            label={<Text style={{ fontSize: 20,fontWeight:'bold',color:'black'}}>Phone Number</Text>} 
-            value={phoneNo}
-            placeholder="Phone Number"
-            onChageValue={text => setPhoneNo(text)}
-          />
-          <InputText
-            label={<Text style={{ fontSize: 20,fontWeight:'bold',color:'black'}}>Password</Text>} 
-            value={password}
-            placeholder="Password.."
-            onChageValue={e => setPassword(e)}
+    <>
+      {isLoaded ? (
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <ActivityIndicator
+            size="large"
+            style={{transform: [{scaleX: 2}, {scaleY: 2}]}}
+            color="#E85F5C"
           />
         </View>
-        <View
-          style={{
-            marginLeft: 20,
-            marginRight: 30,
-            marginTop: 30,
-          }}>
-          <Button
-            bgColor={Styles.colors.skyblue}
-            text="CONFIRM"
-            onPress={() => {
-              navigation.navigate('Verifycode',{phone: phoneNo});
-              // console.log(phoneNo);
-            }}
-          />
-          <Text style={styles.signuptext}>
-            Don't have account?{' '}
-            <Text
-              onPress={() => {
-                navigation.navigate('SignUp');
-              }} style={{
-                color:'black'
+      ) : (
+        <View style={styles.container}>
+          <Image source={require('../assets/bg4.png')} style={styles.avatar} />
+          <View
+            style={{
+              height: '55%',
+              //   margin: 30,
+            }}>
+            <PoppinsText bold={true} style={styles.title}>
+              Login
+            </PoppinsText>
+            <Image
+              source={require('../assets/box-truck.png')}
+              style={{width: '100%', marginTop: 100}}
+            />
+            <View
+              style={{
+                margin: 30,
               }}>
-              {' '}
-              Sign Up Now
-            </Text>
-          </Text>
+              <InputText
+                label={
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontWeight: 'bold',
+                      color: 'black',
+                    }}>
+                    Email
+                  </Text>
+                }
+                value={email}
+                placeholder="Email"
+                onChageValue={text => setEmail(text)}
+              />
+              <Text style={styles.error}>{errors.email}</Text>
+              <InputText
+                label={
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontWeight: 'bold',
+                      color: 'black',
+                    }}>
+                    Password
+                  </Text>
+                }
+                value={password}
+                placeholder="Password.."
+                onChageValue={e => setPassword(e)}
+              />
+              {err ? (
+                <Text style={styles.error}>Invalid Email or Password</Text>
+              ) : (
+                ''
+              )}
+            </View>
+
+            <View
+              style={{
+                marginLeft: 20,
+                marginRight: 30,
+                // marginTop: 10,
+              }}>
+              <Button
+                bgColor={Styles.colors.skyblue}
+                text="LOGIN"
+                onPress={() => {
+                  userLogin();
+                }}
+              />
+              <Text style={styles.signuptext}>
+                Don't have account?{' '}
+                <Text
+                  onPress={() => {
+                    navigation.navigate('SignUp');
+                  }}
+                  style={{
+                    color: 'black',
+                  }}>
+                  {' '}
+                  Sign Up Now
+                </Text>
+              </Text>
+            </View>
+          </View>
         </View>
-      </View>
-    </View>
+      )}
+    </>
   );
 }
 
@@ -156,7 +218,7 @@ const styles = StyleSheet.create({
     marginTop: 70,
     marginLeft: 80,
     marginRight: 50,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   text: {
     color: Styles.colors.white,
@@ -168,7 +230,7 @@ const styles = StyleSheet.create({
   },
   signuptext: {
     fontSize: 14,
-    color:'grey',
+    color: 'grey',
     // lineHeight: 23.46,
     textAlign: 'center',
     fontFamily: 'Poppins-Bold',
@@ -187,5 +249,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: Styles.colors.white,
     borderStyle: 'solid',
+  },
+  error: {
+    color: 'red',
+    fontSize: 14,
+    marginBottom: 12,
+    textAlign: 'center',
   },
 });

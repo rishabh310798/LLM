@@ -28,29 +28,36 @@ export default function AtflContract({navigation}) {
   }, []);
   const DATA = [
     {
+      id: 1,
       title: 'Origin:AFL',
     },
     {
+      id: 2,
         title: 'Destination:YFL',
       },
       {
+        id: 3,
         title: 'PickupDate:8/01/2023'
       },
       {
+        id: 4,
         title: 'DeliveryDate:8/01/2023',
       },
       {
+        id: 5,
         title: 'EquipmentType:flatbed',
       },
       {
+        id: 6,
         title: 'DimensionNeeded:24 foot',
       },
       {
+        id: 7,
         title: 'Payout:$1200',
       },
   ];
-  const Item = ({title}) => (
-    <View style={styles.item}>
+  const Item = ({title},index) => (
+    <View style={styles.item} key={index} >
       <Text
         style={{
           color: 'black',
@@ -89,7 +96,7 @@ export default function AtflContract({navigation}) {
 
       <FlatList
         data={DATA}
-        renderItem={({item}) => <Item title={item.title} />}
+        renderItem={({item}) => <Item title={item.title}  />} 
         keyExtractor={item => item.id}
       />
       <View style={{marginBottom:80 ,marginRight: 30,marginLeft:20}}>
@@ -98,7 +105,7 @@ export default function AtflContract({navigation}) {
             bgColor={Styles.colors.skyblue}
             text="Request Broker Packet"
             onPress={() => {
-             
+              navigation.navigate("BrokerPacket")
               // console.log(phoneNo);
             }}
           />
@@ -106,7 +113,7 @@ export default function AtflContract({navigation}) {
             bgColor={Styles.colors.skyblue}
             text="Decline"
             onPress={() => {
-              
+              navigation.navigate("FreightChat")
               // console.log(phoneNo);
             }}
           />

@@ -1,89 +1,20 @@
 import * as React from 'react';
-import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView, TouchableOpacity} from 'react-native';
 import Styles from '../constants/Styles';
 import Button from '../components/Button';
 import PoppinsText from '../components/PoppinsText';
 
 export default function Home({navigation}) {
+
   return (
-    // <View style={styles.container}>
-    //   <ScrollView>
-    //     <Image
-    //       source={require('../assets/bg4.png')}
-    //       style={styles.backgroundImage}
-    //     />
-    //     <View style={styles.loginForm}>
-    //       <Text style={styles.text}>ET POC</Text>
-    //       <View
-    //         style={{
-    //           margin: 20,
-    //           marginTop: 200,
-    //           backgroundColor: Styles.colors.white,
-    //           padding: 30,
-    //           borderRadius: 10,
-    //         }}>
-    //         <Text bold={true} style={styles.title}>
-    //           Carrier Management Application
-    //         </Text>
-    //         <Image
-    //           source={require('../assets/main.png')}
-    //           style={{
-    //             width: 220,
-    //             height: 220,
-    //             alignItems: 'center',
-    //             alignContent: 'center',
-    //             alignSelf: 'center',
-    //           }}
-    //         />
-    //       </View>
-    //       <View
-    //         style={{
-    //           marginTop: 50,
-    //           alignItems: 'center',
-    //           alignContent: 'center',
-    //           alignSelf: 'center',
-    //         }}>
-    //         <Text
-    //           style={{
-    //             fontSize: 20,
-    //             textAlign: 'center',
-
-    //             fontFamily: 'Poppins-Regular',
-    //           }}>
-    //           <Text style={{fontWeight: 'bold'}}>”Reputation Protection“</Text>{' '}
-    //           own your profile, build your reputation and carry it with you
-    //           everywhere. We give you all the tools to build, protect and grow
-    //           your driver reputation. You choose the pace you want to go. But,
-    //           the sooner you build you profile the faster you will build your
-    //           reputation.
-    //         </Text>
-    //       </View>
-    //     </View>
-    //   </ScrollView>
-    //   <Button
-    //     bgColor={Styles.colors.blue}
-    //     text="Log in"
-    //     onPress={() => {
-    //       navigation.navigate('Login');
-    //       // console.log("aaa :: ", editableUsername)
-    //     }}
-    //   />
-
-    //   <Button
-    //     bgColor={Styles.colors.blue}
-    //     text="Sign up"
-    //     onPress={() => {
-    //       navigation.navigate('SignUp');
-    //     }}
-    //   />
-    // </View>
+  
     <View style={styles.container}>
       <Image source={require('../assets/ep1.png')} style={styles.avatar} />
       <PoppinsText bold={true} style={styles.title}>
         ET POC
       </PoppinsText>
       <ScrollView>
-        <View
+        <TouchableOpacity
           style={{
             margin: 20,
             marginTop: 180,
@@ -92,7 +23,9 @@ export default function Home({navigation}) {
             borderRadius: 10,
                    
           }}
-          elevation={10}>
+          elevation={10} onPress={() => {
+            navigation.navigate('Home');
+          }}>
           <PoppinsText bold={true} style={styles.text}>
             Carrier Management Application
           </PoppinsText>
@@ -106,7 +39,7 @@ export default function Home({navigation}) {
               alignSelf: 'center',
             }}
           />
-        </View>
+        </TouchableOpacity>
       </ScrollView>
       <View
         style={{

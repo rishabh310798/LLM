@@ -90,9 +90,9 @@ export default function CarrierProfile({ navigation }) {
                 marginRight: 20
             }}>
                 <Button bgColor={Styles.colors.gray500} text='Drivers License & Truck Registration' onPress={() => { }} />
-                <Button bgColor={Styles.colors.gray500} text='Uploaded Files' onPress={() => { }} />
+                <Button bgColor={Styles.colors.gray500} text='Uploaded Files' onPress={() => { navigation.navigate('UpFile')}} />
                 <Button bgColor={Styles.colors.gray500} text='Contact Support' onPress={() => {
-                    navigation.navigate('FilesUploaded')
+                    navigation.navigate('YourSupport')
                 }} />
             </View>
            

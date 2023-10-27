@@ -2,19 +2,20 @@
 // export const API_BASE_URL = "";
 
 // Staging ()
-export const API_BASE_URL = "https://lyz3om06l2.execute-api.us-east-2.amazonaws.com/default/api/";
+// export const API_BASE_URL = "http://127.0.0.1:8000/";
+export const API_BASE_URL = "https://dm8unk9v42.execute-api.us-east-1.amazonaws.com/dev/"
 
 // live ()
 // export const API_BASE_URL = "";
 
 //GET
-export const getallrelays = "relays";
+// export const getallrelays = "relays";
 
 //POST
-export const createrelay = "relay/create";
-export const loginuser = "user/login";
-export const registeruser = "user/register";
-export const verifyotp = "user/verify-otp";
+
+export const loginuser = "api/login/";
+export const registeruser = "api/register/";
+export const verifyotp = "api/verifyOTP/";
+
 
 //DELETE
-export const deleterelays = "relays/";
